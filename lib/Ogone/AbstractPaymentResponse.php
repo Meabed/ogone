@@ -21,19 +21,19 @@ abstract class AbstractPaymentResponse extends AbstractResponse implements Payme
         $value = trim($this->parameters['AMOUNT']);
 
         $withoutDecimals = '#^\d*$#';
-        $oneDecimal = '#^\d*\.\d$#';
-        $twoDecimals = '#^\d*\.\d\d$#';
+        $oneDecimal      = '#^\d*\.\d$#';
+        $twoDecimals     = '#^\d*\.\d\d$#';
 
-        if(preg_match($withoutDecimals, $value)) {
-            return (int) ($value.'00');
+        if (preg_match($withoutDecimals, $value)) {
+            return (int)($value . '00');
         }
 
-        if(preg_match($oneDecimal, $value)) {
-            return (int) (str_replace('.', '', $value).'0');
+        if (preg_match($oneDecimal, $value)) {
+            return (int)(str_replace('.', '', $value) . '0');
         }
 
-        if(preg_match($twoDecimals, $value)) {
-            return (int) (str_replace('.', '', $value));
+        if (preg_match($twoDecimals, $value)) {
+            return (int)(str_replace('.', '', $value));
         }
 
         throw new \InvalidArgumentException("Not a valid currency amount");
@@ -41,7 +41,7 @@ abstract class AbstractPaymentResponse extends AbstractResponse implements Payme
 
     public function isSuccessful()
     {
-        return in_array($this->getParam('STATUS'), array(PaymentResponse::STATUS_AUTHORISED, PaymentResponse::STATUS_PAYMENT_REQUESTED));
+        return in_array($this->getParam('STATUS'), [PaymentResponse::STATUS_AUTHORISED, PaymentResponse::STATUS_PAYMENT_REQUESTED]);
     }
 
 }

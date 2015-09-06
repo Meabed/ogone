@@ -8,7 +8,8 @@ namespace Ogone\Tests\DirectLink;
 use Ogone\Tests;
 use Ogone\DirectLink\DirectLinkMaintenanceResponse;
 
-class DirectLinkMaintenanceResponseTest extends \TestCase {
+class DirectLinkMaintenanceResponseTest extends \TestCase
+{
 
     /**
      * @test
@@ -60,8 +61,8 @@ class DirectLinkMaintenanceResponseTest extends \TestCase {
         $this->assertTrue($maintenanceResponse->isSuccessful());
     }
 
-	/** @test */
-	public function AmountIsConvertedToCent()
+    /** @test */
+    public function AmountIsConvertedToCent()
     {
         $xml = $this->provideXML();
 
@@ -69,20 +70,20 @@ class DirectLinkMaintenanceResponseTest extends \TestCase {
         $this->assertEquals(100, $maintenanceResponse->getParam('amount'));
     }
 
-	public function provideFloats()
+    public function provideFloats()
     {
-        return array(
-            array('17.89', 1789),
-            array('65.35', 6535),
-            array('12.99', 1299),
-        );
+        return [
+            ['17.89', 1789],
+            ['65.35', 6535],
+            ['12.99', 1299],
+        ];
     }
 
-	/**
+    /**
      * @test
      * @dataProvider provideFloats
      */
-	public function CorrectlyConvertsFloatAmountsToInteger($string, $integer)
+    public function CorrectlyConvertsFloatAmountsToInteger($string, $integer)
     {
         $xml = $this->provideXML($string);
 
@@ -90,10 +91,10 @@ class DirectLinkMaintenanceResponseTest extends \TestCase {
         $this->assertEquals($integer, $maintenanceResponse->getParam('amount'));
     }
 
-	/**
+    /**
      * Helper method to setup an xml-string
      */
-	private function provideXML($amount = null)
+    private function provideXML($amount = null)
     {
 
         $xml = '<?xml version="1.0"?>
@@ -104,7 +105,7 @@ class DirectLinkMaintenanceResponseTest extends \TestCase {
                 NCERRORPLUS="!"
                 ACCEPTANCE=""
                 STATUS="91"
-                AMOUNT="'.(($amount) ? $amount : '1').'"
+                AMOUNT="' . (($amount) ? $amount : '1') . '"
                 CURRENCY="GBP">
                 </ncresponse>';
 

@@ -27,28 +27,28 @@ class EcommercePaymentResponseTest extends \TestCase
 		$this->assertTrue($paymentResponse->isValid(new FakeShaComposer));
 	}
 
-    /** @test */
-    public function CanBeConvertedToArray()
-    {
-        $aRequest = $this->provideRequest();
+	/** @test */
+	public function CanBeConvertedToArray()
+	{
+		$aRequest = $this->provideRequest();
 
-        $paymentResponse = new EcommercePaymentResponse($aRequest);
-        $paymentResponse->isValid(new FakeShaComposer);
-        $array = $paymentResponse->toArray();
-        $this->assertArrayHasKey('ORDERID', $array);
-        $this->assertArrayHasKey('STATUS', $array);
-        $this->assertArrayHasKey('AMOUNT', $array);
-        $this->assertArrayHasKey('SHASIGN', $array);
-    }
+		$paymentResponse = new EcommercePaymentResponse($aRequest);
+		$paymentResponse->isValid(new FakeShaComposer);
+		$array = $paymentResponse->toArray();
+		$this->assertArrayHasKey('ORDERID', $array);
+		$this->assertArrayHasKey('STATUS', $array);
+		$this->assertArrayHasKey('AMOUNT', $array);
+		$this->assertArrayHasKey('SHASIGN', $array);
+	}
 
 
 	/**
 	 * @test
 	 * @expectedException InvalidArgumentException
-	*/
+	 */
 	public function CannotExistWithoutShaSign()
 	{
-		$paymentResponse = new EcommercePaymentResponse(array());
+		$paymentResponse = new EcommercePaymentResponse([]);
 	}
 
 	/** @test */
@@ -92,23 +92,23 @@ class EcommercePaymentResponseTest extends \TestCase
 
 	public function provideFloats()
 	{
-		return array(
-			array('17.89', 1789),
-			array('65.35', 6535),
-			array('12.99', 1299),
-            array('1.0', 100)
-		);
+		return [
+			['17.89', 1789],
+			['65.35', 6535],
+			['12.99', 1299],
+			['1.0', 100],
+		];
 	}
 
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function InvalidForInvalidCurrency()
-    {
-        $paymentResponse = new EcommercePaymentResponse(array('amount' => 'NaN', 'shasign' => '123'));
-        $paymentResponse->getParam('amount');
-    }
+	/**
+	 * @test
+	 * @expectedException InvalidArgumentException
+	 */
+	public function InvalidForInvalidCurrency()
+	{
+		$paymentResponse = new EcommercePaymentResponse(['amount' => 'NaN', 'shasign' => '123']);
+		$paymentResponse->getParam('amount');
+	}
 
 	/**
 	 * @test
@@ -116,7 +116,7 @@ class EcommercePaymentResponseTest extends \TestCase
 	 */
 	public function CorrectlyConvertsFloatAmountsToInteger($string, $integer)
 	{
-		$paymentResponse = new EcommercePaymentResponse(array('amount' => $string, 'shasign' => '123'));
+		$paymentResponse = new EcommercePaymentResponse(['amount' => $string, 'shasign' => '123']);
 		$this->assertEquals($integer, $paymentResponse->getParam('amount'));
 	}
 
@@ -125,13 +125,13 @@ class EcommercePaymentResponseTest extends \TestCase
 	 */
 	private function provideRequest()
 	{
-		return array(
-			'orderID' => '123',
-			'SHASIGN' => FakeShaComposer::FAKESHASTRING,
+		return [
+			'orderID'       => '123',
+			'SHASIGN'       => FakeShaComposer::FAKESHASTRING,
 			'UNKNOWN_PARAM' => false, /* unkown parameter, should be filtered out */
-			'status' => PaymentResponse::STATUS_AUTHORISED,
-			'amount' => 1,
-		);
+			'status'        => PaymentResponse::STATUS_AUTHORISED,
+			'amount'        => 1,
+		];
 	}
 }
 

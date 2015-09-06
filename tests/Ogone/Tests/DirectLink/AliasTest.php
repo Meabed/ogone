@@ -53,6 +53,6 @@ class AliasTest extends \TestCase
     /** @test */
     public function CanBeRepresentedAsString()
     {
-        $this->assertEquals('test123', (string) new Alias('test123'));
+        $this->assertEquals('test123', (string)new Alias('test123'));
     }
 }

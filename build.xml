@@ -9,7 +9,7 @@
         <mkdir dir="build/coverage"/>
     </target>
 
-    <target name="unittest" depends="clean, prepare" description="Run unit tests" >
+    <target name="unittest" depends="clean, prepare" description="Run unit tests">
         <exec executable="phpunit" failonerror="true">
         </exec>
     </target>
@@ -22,7 +22,7 @@
             <arg value="lib"/>
         </exec>
     </target>
-    
+
     <!-- <target name="documentation">
         <exec dir="doc/" executable="make" failonerror="true">
             <arg value="html"/>

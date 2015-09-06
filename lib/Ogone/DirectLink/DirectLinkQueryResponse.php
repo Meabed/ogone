@@ -9,7 +9,8 @@ use Ogone\AbstractPaymentResponse;
 use SimpleXMLElement;
 use InvalidArgumentException;
 
-class DirectLinkQueryResponse extends AbstractPaymentResponse {
+class DirectLinkQueryResponse extends AbstractPaymentResponse
+{
 
     public function __construct($xml_string)
     {
@@ -45,11 +46,11 @@ class DirectLinkQueryResponse extends AbstractPaymentResponse {
             array_flip(
                 array_merge(
                     $this->ogoneFields,
-                    array(
+                    [
                         'PAYIDSUB',
                         'NCSTATUS',
                         'NCERRORPLUS',
-                    )
+                    ]
                 )
             )
         );
@@ -57,7 +58,7 @@ class DirectLinkQueryResponse extends AbstractPaymentResponse {
 
     private function xmlAttributesToArray($attributes)
     {
-        $attributesArray = array();
+        $attributesArray = [];
 
         if (count($attributes)) {
             foreach ($attributes as $key => $value) {

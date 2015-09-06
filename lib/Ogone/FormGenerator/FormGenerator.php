@@ -17,6 +17,7 @@ interface FormGenerator
 {
     /**
      * @param EcommercePaymentRequest $paymentRequest
+     *
      * @return string
      */
     public function render(EcommercePaymentRequest $paymentRequest);

@@ -13,7 +13,8 @@ namespace Ogone\Tests\DirectLink;
 use Ogone\DirectLink\CreateAliasResponse;
 use Ogone\Tests\ShaComposer\FakeShaComposer;
 
-class CreateAliasResponseTest extends \TestCase {
+class CreateAliasResponseTest extends \TestCase
+{
 
     /** @test */
     public function CanBeVerified()
@@ -30,7 +31,7 @@ class CreateAliasResponseTest extends \TestCase {
      */
     public function CannotExistWithoutShaSign()
     {
-        $createAliasResponse = new CreateAliasResponse(array());
+        $createAliasResponse = new CreateAliasResponse([]);
     }
 
     /** @test */
@@ -54,9 +55,9 @@ class CreateAliasResponseTest extends \TestCase {
     /** @test */
     public function AliasIsEqual()
     {
-        $aRequest = $this->provideRequest();
+        $aRequest            = $this->provideRequest();
         $createAliasResponse = new CreateAliasResponse($aRequest);
-        $alias = $createAliasResponse->getAlias();
+        $alias               = $createAliasResponse->getAlias();
         $this->assertEquals('customer_123', $alias->__toString());
         $this->assertEquals($aRequest['CN'], $alias->getCardName());
         $this->assertEquals($aRequest['CARDNO'], $alias->getCardNumber());
@@ -68,16 +69,16 @@ class CreateAliasResponseTest extends \TestCase {
      */
     private function provideRequest()
     {
-        return array(
-            'SHASIGN' => FakeShaComposer::FAKESHASTRING,
+        return [
+            'SHASIGN'       => FakeShaComposer::FAKESHASTRING,
             'UNKNOWN_PARAM' => false, /* unkown parameter, should be filtered out */
-            'status' => 0,
-            'orderID' => '48495482424',
-            'alias' => 'customer_123',
-            'CN' => 'John Doe',
-            'CARDNO' => 'xxxxxxxxxxx4848',
-            'ED' => '1220'
-        );
+            'status'        => 0,
+            'orderID'       => '48495482424',
+            'alias'         => 'customer_123',
+            'CN'            => 'John Doe',
+            'CARDNO'        => 'xxxxxxxxxxx4848',
+            'ED'            => '1220',
+        ];
     }
 
 }

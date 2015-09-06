@@ -11,7 +11,8 @@
 namespace Ogone;
 
 
-interface Request {
+interface Request
+{
 
     public function toArray();
 

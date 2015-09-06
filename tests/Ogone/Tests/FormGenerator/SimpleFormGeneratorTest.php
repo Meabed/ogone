@@ -16,9 +16,9 @@ use Ogone\PaymentRequest;
 
 class SimpleFormGeneratorTest extends \TestCase
 {
-	/** @test */
-	public function GeneratesAForm()
-	{
+    /** @test */
+    public function GeneratesAForm()
+    {
         $expected =
             '<form method="post" action="https://secure.ogone.com/ncol/test/orderstandard_utf8.asp" id="ogone" name="ogone">
                 <input type="hidden" name="PSPID" value="123456789" />
@@ -31,7 +31,7 @@ class SimpleFormGeneratorTest extends \TestCase
                 <input type="hidden" name="OWNERZIP" value="2300" />
                 <input type="hidden" name="OWNERCTY" value="FR" />
                 <input type="hidden" name="EMAIL" value="louis.xiv@versailles.fr" />
-                <input type="hidden" name="'.PaymentRequest::SHASIGN_FIELD.'" value="foo" />
+                <input type="hidden" name="' . PaymentRequest::SHASIGN_FIELD . '" value="foo" />
                 <input type="submit" value="Submit" id="ogonesubmit" name="ogonesubmit" />
             </form>';
 
@@ -41,7 +41,7 @@ class SimpleFormGeneratorTest extends \TestCase
 
         $this->assertXmlStringEqualsXmlString($expected, $formGenerator->render($paymentRequest));
         $this->assertXmlStringEqualsXmlString($expected, $formGenerator->render($paymentRequest, 'ogone', true));
-	}
+    }
 
     /** @test */
     public function BCCheck()
@@ -58,7 +58,7 @@ class SimpleFormGeneratorTest extends \TestCase
                 <input type="hidden" name="OWNERZIP" value="2300" />
                 <input type="hidden" name="OWNERCTY" value="FR" />
                 <input type="hidden" name="EMAIL" value="louis.xiv@versailles.fr" />
-                <input type="hidden" name="'.PaymentRequest::SHASIGN_FIELD.'" value="foo" />
+                <input type="hidden" name="' . PaymentRequest::SHASIGN_FIELD . '" value="foo" />
             </form>';
 
         $paymentRequest = $this->provideMinimalPaymentRequest();
@@ -70,9 +70,9 @@ class SimpleFormGeneratorTest extends \TestCase
         $this->assertXmlStringEqualsXmlString($expected, $formGenerator->render($paymentRequest, 'ogoneform', false));
     }
 
-	/** @test */
-	public function GeneratesAFormWithCustomOperationParameter()
-	{
+    /** @test */
+    public function GeneratesAFormWithCustomOperationParameter()
+    {
         $expected =
             '<form method="post" action="https://secure.ogone.com/ncol/test/orderstandard_utf8.asp" id="ogone" name="ogone">
                 <input type="hidden" name="PSPID" value="123456789" />
@@ -86,7 +86,7 @@ class SimpleFormGeneratorTest extends \TestCase
                 <input type="hidden" name="OWNERCTY" value="FR" />
                 <input type="hidden" name="EMAIL" value="louis.xiv@versailles.fr" />
                 <input type="hidden" name="OPERATION" value="SAL" />
-                <input type="hidden" name="'.PaymentRequest::SHASIGN_FIELD.'" value="foo" />
+                <input type="hidden" name="' . PaymentRequest::SHASIGN_FIELD . '" value="foo" />
                 <input type="submit" value="Submit" id="ogonesubmit" name="ogonesubmit" />
             </form>';
 
@@ -97,5 +97,5 @@ class SimpleFormGeneratorTest extends \TestCase
 
         $this->assertXmlStringEqualsXmlString($expected, $formGenerator->render($paymentRequest));
         $this->assertXmlStringEqualsXmlString($expected, $formGenerator->render($paymentRequest, 'ogone', true));
-	}
+    }
 }

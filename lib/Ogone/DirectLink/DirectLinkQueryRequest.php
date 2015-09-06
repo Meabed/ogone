@@ -8,15 +8,16 @@ namespace Ogone\DirectLink;
 use Ogone\AbstractDirectLinkRequest;
 use Ogone\ShaComposer\ShaComposer;
 
-class DirectLinkQueryRequest extends AbstractDirectLinkRequest {
+class DirectLinkQueryRequest extends AbstractDirectLinkRequest
+{
 
-    const TEST = "https://secure.ogone.com/ncol/test/querydirect.asp";
+    const TEST       = "https://secure.ogone.com/ncol/test/querydirect.asp";
     const PRODUCTION = "https://secure.ogone.com/ncol/prod/querydirect.asp";
 
     public function __construct(ShaComposer $shaComposer)
     {
         $this->shaComposer = $shaComposer;
-        $this->ogoneUri = self::TEST;
+        $this->ogoneUri    = self::TEST;
     }
 
     public function setPayIdSub($payidsub)
@@ -26,16 +27,16 @@ class DirectLinkQueryRequest extends AbstractDirectLinkRequest {
 
     public function getRequiredFields()
     {
-        return array(
+        return [
             'pspid',
             'userid',
             'pswd',
-        );
+        ];
     }
 
     public function getValidOgoneUris()
     {
-        return array(self::TEST, self::PRODUCTION);
+        return [self::TEST, self::PRODUCTION];
     }
 
     public function validate()

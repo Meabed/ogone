@@ -10,7 +10,8 @@ use Ogone\Tests\ShaComposer\FakeShaComposer;
 use Ogone\DirectLink\DirectLinkQueryRequest;
 use Ogone\DirectLink\Alias;
 
-class DirectLinkQueryRequestTest extends \TestCase {
+class DirectLinkQueryRequestTest extends \TestCase
+{
 
     /** @test */
     public function IsValidWhenRequiredFieldsAreFilledIn()
@@ -63,9 +64,9 @@ class DirectLinkQueryRequestTest extends \TestCase {
 
     public function provideBadParameters()
     {
-        return array(
-            array('setPassword', '12'),
-            array('setUserid', '12'),
-        );
+        return [
+            ['setPassword', '12'],
+            ['setUserid', '12'],
+        ];
     }
 }

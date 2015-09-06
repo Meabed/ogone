@@ -14,13 +14,14 @@ use Ogone\AbstractPaymentResponse;
 use SimpleXMLElement;
 use InvalidArgumentException;
 
-class DirectLinkPaymentResponse extends AbstractPaymentResponse {
+class DirectLinkPaymentResponse extends AbstractPaymentResponse
+{
 
     public function __construct($xml_string)
     {
         libxml_use_internal_errors(true);
 
-        if(simplexml_load_string($xml_string)) {
+        if (simplexml_load_string($xml_string)) {
 
             $xmlResponse = new SimpleXMLElement($xml_string);
 
@@ -40,10 +41,10 @@ class DirectLinkPaymentResponse extends AbstractPaymentResponse {
 
     private function xmlAttributesToArray($attributes)
     {
-        $attributesArray = array();
+        $attributesArray = [];
 
-        if(count($attributes)) {
-            foreach($attributes as $key => $value) {
+        if (count($attributes)) {
+            foreach ($attributes as $key => $value) {
                 $attributesArray[(string)$key] = (string)$value;
             }
         }

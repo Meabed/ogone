@@ -24,14 +24,15 @@ use Ogone\DirectLink\DirectLinkPaymentResponse;
 /**
  * @group integration
  */
-class OgoneTest extends \TestCase {
+class OgoneTest extends \TestCase
+{
 
     /**
      * @test
      */
     public function AliasCreationIsSuccessful()
     {
-        $passphraseOut = new Passphrase(PASSPHRASE_SHA_OUT);
+        $passphraseOut  = new Passphrase(PASSPHRASE_SHA_OUT);
         $shaOutComposer = new AllParametersShaComposer($passphraseOut);
         $shaOutComposer->addParameterFilter(new ShaOutParameterFilter());
 
@@ -40,7 +41,7 @@ class OgoneTest extends \TestCase {
         $this->assertTrue($createAliasResponse->isValid($shaOutComposer));
         $this->assertTrue($createAliasResponse->isSuccessful());
 
-        return (string) $createAliasResponse->getAlias();
+        return (string)$createAliasResponse->getAlias();
     }
 
     /**
@@ -49,8 +50,8 @@ class OgoneTest extends \TestCase {
      */
     public function DirectLinkPaymentIsSuccessful($alias)
     {
-        $passphrase = new Passphrase(PASSPHRASE_SHA_IN);
-        $shaComposer = new AllParametersShaComposer($passphrase);
+        $passphrase        = new Passphrase(PASSPHRASE_SHA_IN);
+        $shaComposer       = new AllParametersShaComposer($passphrase);
         $directLinkRequest = new DirectLinkPaymentRequest($shaComposer);
 
         $orderId = uniqid('order_'); // create a unique order id
@@ -66,15 +67,15 @@ class OgoneTest extends \TestCase {
         $directLinkRequest->setEci(new Eci(Eci::ECOMMERCE_RECURRING));
         $directLinkRequest->validate();
 
-        $body = array();
-        foreach($directLinkRequest->toArray() as $key => $value) {
+        $body = [];
+        foreach ($directLinkRequest->toArray() as $key => $value) {
             $body[strtoupper($key)] = $value;
         }
 
         $body['SHASIGN'] = $directLinkRequest->getShaSign();
 
-        $client = new Client($directLinkRequest->getOgoneUri());
-        $request = $client->post(null, null, $body);
+        $client   = new Client($directLinkRequest->getOgoneUri());
+        $request  = $client->post(null, null, $body);
         $response = $request->send();
 
         $directLinkResponse = new DirectLinkPaymentResponse($response->getBody(true));
@@ -89,7 +90,7 @@ class OgoneTest extends \TestCase {
      */
     public function AliasIsCreatedByOgone()
     {
-        $passphraseOut = new Passphrase(PASSPHRASE_SHA_OUT);
+        $passphraseOut  = new Passphrase(PASSPHRASE_SHA_OUT);
         $shaOutComposer = new AllParametersShaComposer($passphraseOut);
         $shaOutComposer->addParameterFilter(new ShaOutParameterFilter());
 
@@ -104,7 +105,7 @@ class OgoneTest extends \TestCase {
      */
     public function CreateAliasInvalid()
     {
-        $passphraseOut = new Passphrase(PASSPHRASE_SHA_OUT);
+        $passphraseOut  = new Passphrase(PASSPHRASE_SHA_OUT);
         $shaOutComposer = new AllParametersShaComposer($passphraseOut);
         $shaOutComposer->addParameterFilter(new ShaOutParameterFilter());
 
@@ -120,7 +121,7 @@ class OgoneTest extends \TestCase {
         /*
          *  Create an alias request to Ogone
          */
-        $passphrase = new Passphrase(PASSPHRASE_SHA_IN);
+        $passphrase  = new Passphrase(PASSPHRASE_SHA_IN);
         $shaComposer = new AllParametersShaComposer($passphrase);
 
         $createAliasRequest = new CreateAliasRequest($shaComposer);
@@ -128,31 +129,31 @@ class OgoneTest extends \TestCase {
         $createAliasRequest->setAccepturl('http://www.example.com');
         $createAliasRequest->setExceptionurl('http://www.example.com');
 
-        if($createAlias == true) {
+        if ($createAlias == true) {
             $unique_alias = uniqid('customer_'); // create a unique alias
-            $alias = new Alias($unique_alias);
+            $alias        = new Alias($unique_alias);
             $createAliasRequest->setAlias($alias);
         }
 
         $createAliasRequest->validate();
 
-        $body = array();
-        foreach($createAliasRequest->toArray() as $key => $value) {
+        $body = [];
+        foreach ($createAliasRequest->toArray() as $key => $value) {
             $body[strtoupper($key)] = $value;
         }
 
         $body['SHASIGN'] = $createAliasRequest->getShaSign();
-        $body['CN'] = 'Don Corleone';
-        $body['CARDNO'] = ($noValidCardnumber) ? '' : '4111111111111111'; // Ogone Visa test cardnumber
-        $body['CVC'] = '777';
-        $body['ED'] = date('my', strtotime('+1 year')); // test-date should be in the future
+        $body['CN']      = 'Don Corleone';
+        $body['CARDNO']  = ($noValidCardnumber) ? '' : '4111111111111111'; // Ogone Visa test cardnumber
+        $body['CVC']     = '777';
+        $body['ED']      = date('my', strtotime('+1 year')); // test-date should be in the future
 
-        $client = new Client($createAliasRequest->getOgoneUri());
-        $request = $client->post(null, null, $body);
+        $client   = new Client($createAliasRequest->getOgoneUri());
+        $request  = $client->post(null, null, $body);
         $response = $request->send();
 
-        $url = parse_url($response->getInfo('url'));
-        $params = array();
+        $url    = parse_url($response->getInfo('url'));
+        $params = [];
         parse_str($url['query'], $params);
 
         /*

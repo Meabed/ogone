@@ -4,7 +4,8 @@ namespace Ogone\Subscription;
 
 use InvalidArgumentException;
 
-class SubscriptionPeriod {
+class SubscriptionPeriod
+{
 
     /** @var string */
     const UNIT_DAILY = 'd';
@@ -41,11 +42,13 @@ class SubscriptionPeriod {
 
     /**
      * @param string $unit
-     * @param int $interval
-     * @param int $moment
+     * @param int    $interval
+     * @param int    $moment
+     *
      * @throws InvalidArgumentException
      */
-    public function __construct($unit, $interval, $moment) {
+    public function __construct($unit, $interval, $moment)
+    {
         $this->setUnit($unit);
         $this->setInterval($interval);
         $this->setMoment($moment);
@@ -54,24 +57,27 @@ class SubscriptionPeriod {
     /**
      * @return string
      */
-    public function getUnit() {
+    public function getUnit()
+    {
         return $this->unit;
     }
 
     /**
      * @param string $unit
+     *
      * @throws InvalidArgumentException
      */
-    public function setUnit($unit) {
-        if (!in_array($unit, array(self::UNIT_DAILY, self::UNIT_WEEKLY, self::UNIT_MONTHLY))) {
-            throw new InvalidArgumentException("Subscription period unit should be '".self::UNIT_DAILY."' (daily), '".self::UNIT_WEEKLY."' (weekly) or '".self::UNIT_MONTHLY."' (monthly)");
+    public function setUnit($unit)
+    {
+        if (!in_array($unit, [self::UNIT_DAILY, self::UNIT_WEEKLY, self::UNIT_MONTHLY])) {
+            throw new InvalidArgumentException("Subscription period unit should be '" . self::UNIT_DAILY . "' (daily), '" . self::UNIT_WEEKLY . "' (weekly) or '" . self::UNIT_MONTHLY . "' (monthly)");
         }
 
-        if(self::UNIT_WEEKLY === $unit) {
-            if($this->moment > 7) {
+        if (self::UNIT_WEEKLY === $unit) {
+            if ($this->moment > 7) {
                 throw new InvalidArgumentException('The unit cannot be set to weekly while the moment > 7');
             }
-        } elseif(self::UNIT_MONTHLY === $unit && $this->moment > 28) {
+        } elseif (self::UNIT_MONTHLY === $unit && $this->moment > 28) {
             throw new InvalidArgumentException('The unit cannot be set to monthly while the moment > 28');
         }
         $this->unit = $unit;
@@ -80,22 +86,25 @@ class SubscriptionPeriod {
     /**
      * @return int
      */
-    public function getInterval() {
+    public function getInterval()
+    {
         return $this->interval;
     }
 
     /**
      * @param int $interval
+     *
      * @throws InvalidArgumentException
      */
-    public function setInterval($interval) {
-        if(!is_int($interval)) {
+    public function setInterval($interval)
+    {
+        if (!is_int($interval)) {
             throw new InvalidArgumentException("Integer expected for interval");
         }
-        if($interval < 0) {
+        if ($interval < 0) {
             throw new InvalidArgumentException("Interval must be a positive number > 0");
         }
-        if($interval >= 1.0E+15) {
+        if ($interval >= 1.0E+15) {
             throw new InvalidArgumentException("Interval is too high");
         }
         $this->interval = $interval;
@@ -104,22 +113,25 @@ class SubscriptionPeriod {
     /**
      * @return int
      */
-    public function getMoment() {
+    public function getMoment()
+    {
         return $this->moment;
     }
 
     /**
      * @param int $moment
+     *
      * @throws InvalidArgumentException
      */
-    public function setMoment($moment) {
-        if(!is_int($moment)) {
+    public function setMoment($moment)
+    {
+        if (!is_int($moment)) {
             throw new InvalidArgumentException("Integer expected for moment");
         }
-        if($moment <= 0) {
+        if ($moment <= 0) {
             throw new InvalidArgumentException("Moment must be a positive number");
         }
-        if($moment >= 1.0E+15) {
+        if ($moment >= 1.0E+15) {
             throw new InvalidArgumentException("Interval is too high");
         }
 

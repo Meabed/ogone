@@ -14,7 +14,7 @@ namespace Ogone\ParameterFilter;
 /** @todo test this */
 class ShaInParameterFilter implements ParameterFilter
 {
-	private $allowed = array(
+	private $allowed = [
 		'ACCEPTURL', 'ADDMATCH', 'ADDRMATCH', 'ALIAS', 'ALIASOPERATION', 'ALIASPERSISTEDAFTERUSE', 'ALIASUSAGE',
 		'ALLOWCORRECTION', 'AMOUNT', 'AMOUNTHTVA', 'AMOUNTTVA', 'BACKURL', 'BGCOLOR',
 		'BRAND', 'BRANDVISUAL', 'BUTTONBGCOLOR', 'BUTTONTXTCOLOR', 'CANCELURL',
@@ -48,12 +48,13 @@ class ShaInParameterFilter implements ParameterFilter
 		'TXTBADDR2', 'TXTCOLOR', 'TXTOKEN', 'TXTOKENTXTOKENPAYPAL', 'TYPE_COUNTRY',
 		'UCAF_AUTHENTICATION_DATA', 'UCAF_PAYMENT_CARD_CVC2', 'UCAF_PAYMENT_CARD_EXPDATE_MONTH',
 		'UCAF_PAYMENT_CARD_EXPDATE_YEAR', 'UCAF_PAYMENT_CARD_NUMBER', 'USERID', 'USERTYPE',
-		'VERSION', 'WBTU_MSISDN', 'WBTU_ORDERID', 'WEIGHTUNIT', 'WIN3DS', 'WITHROOT'
-	);
+		'VERSION', 'WBTU_MSISDN', 'WBTU_ORDERID', 'WEIGHTUNIT', 'WIN3DS', 'WITHROOT',
+	];
 
 	public function filter(array $parameters)
 	{
 		$parameters = array_change_key_case($parameters, CASE_UPPER);
+
 		return array_intersect_key($parameters, array_flip($this->allowed));
 	}
 }

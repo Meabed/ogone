@@ -72,41 +72,41 @@ class EcommercePaymentRequestTest extends \TestCase
 	public function provideBadParameters()
 	{
 		$longString = str_repeat('longstring', 100);
-		$notAUri = 'http://not a uri';
-		$longUri = "http://www.example.com/$longString";
+		$notAUri    = 'http://not a uri';
+		$longUri    = "http://www.example.com/$longString";
 
-		return array(
-			array('setAccepturl', $notAUri),
-			array('setAmount', 10.50),
-			array('setAmount', -1),
-            array('setAmount', 1000000000000000),
-			array('setBrand', 'Oxfam'),
-			array('setCancelurl', $notAUri),
-            array('setCancelurl', $longUri),
-			array('setCurrency', 'Belgische Frank'),
+		return [
+			['setAccepturl', $notAUri],
+			['setAmount', 10.50],
+			['setAmount', -1],
+			['setAmount', 1000000000000000],
+			['setBrand', 'Oxfam'],
+			['setCancelurl', $notAUri],
+			['setCancelurl', $longUri],
+			['setCurrency', 'Belgische Frank'],
 			//array('setCustomername', ''),
-			array('setDeclineurl', $notAUri),
-			array('setDynamicTemplateUri', $notAUri),
-			array('setEmail', 'foo @ bar'),
-			array('setEmail', "$longString@example.com"),
-			array('setExceptionurl', $notAUri),
+			['setDeclineurl', $notAUri],
+			['setDynamicTemplateUri', $notAUri],
+			['setEmail', 'foo @ bar'],
+			['setEmail', "$longString@example.com"],
+			['setExceptionurl', $notAUri],
 			//array('setFeedbackMessage', ''),
 			//array('setFeedbackParams', ''),
-			array('setLanguage', 'West-Vlaams'),
-			array('setOgoneUri', $notAUri),
-			array('setOrderDescription', $longString),
-			array('setOrderid', "Weird çh@®a©†€rs"),
-			array('setOrderid', $longString),
-			array('setOwnerAddress', $longString),
-			array('setOwnercountry', 'Benidorm'),
-			array('setOwnerPhone', $longString),
-			array('setOwnerTown', $longString),
-			array('setOwnerZip', $longString),
-			array('setParamvar', $longString),
-			array('setPaymentMethod', 'Digital'),
-			array('setPspid', $longString),
-            array('setOperation', 'UNKNOWN_OPERATION'),
-            array('setOperation', EcommercePaymentRequest::OPERATION_REFUND),
-		);
+			['setLanguage', 'West-Vlaams'],
+			['setOgoneUri', $notAUri],
+			['setOrderDescription', $longString],
+			['setOrderid', "Weird çh@®a©†€rs"],
+			['setOrderid', $longString],
+			['setOwnerAddress', $longString],
+			['setOwnercountry', 'Benidorm'],
+			['setOwnerPhone', $longString],
+			['setOwnerTown', $longString],
+			['setOwnerZip', $longString],
+			['setParamvar', $longString],
+			['setPaymentMethod', 'Digital'],
+			['setPspid', $longString],
+			['setOperation', 'UNKNOWN_OPERATION'],
+			['setOperation', EcommercePaymentRequest::OPERATION_REFUND],
+		];
 	}
 }

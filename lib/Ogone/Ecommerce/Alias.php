@@ -3,10 +3,11 @@ namespace Ogone\Ecommerce;
 
 use InvalidArgumentException;
 
-class Alias {
+class Alias
+{
 
     const OPERATION_BY_MERCHANT = 'BYMERCHANT';
-    const OPERATION_BY_PSP = 'BYPSP';
+    const OPERATION_BY_PSP      = 'BYPSP';
 
     /** @var string */
     private $aliasOperation;
@@ -19,13 +20,13 @@ class Alias {
 
     public function __construct($alias, $aliasOperation = self::OPERATION_BY_MERCHANT, $aliasUsage = null)
     {
-        if(preg_match('/[^a-zA-Z0-9_-]/', $alias)) {
+        if (preg_match('/[^a-zA-Z0-9_-]/', $alias)) {
             throw new InvalidArgumentException("Alias cannot contain special characters");
         }
 
         $this->aliasOperation = $aliasOperation;
-        $this->aliasUsage = $aliasUsage;
-        $this->alias = $alias;
+        $this->aliasUsage     = $aliasUsage;
+        $this->alias          = $alias;
     }
 
     public function operationByMerchant()

@@ -5,9 +5,11 @@ namespace Ogone\DirectLink;
 /**
  * Class Eci
  *
- * Electronic Commerce Indicator. The ECI indicates the security level at which the payment information is processed between the cardholder and merchant.
- * A default ECI value can be set in the Technical Information page. An ECI value sent along in the transaction, will overwrite the default ECI value.
- * It is the merchant's responsibility to give correct ECI values for the transactions. For e-Commerce, our system sets ECI value 5, 6 or 7 depending on the 3-D Secure authentication result.
+ * Electronic Commerce Indicator. The ECI indicates the security level at which the payment information is processed
+ * between the cardholder and merchant. A default ECI value can be set in the Technical Information page. An ECI value
+ * sent along in the transaction, will overwrite the default ECI value. It is the merchant's responsibility to give
+ * correct ECI values for the transactions. For e-Commerce, our system sets ECI value 5, 6 or 7 depending on the 3-D
+ * Secure authentication result.
  */
 class Eci
 {
@@ -48,6 +50,6 @@ class Eci
 
     public function __toString()
     {
-        return (string) $this->code;
+        return (string)$this->code;
     }
 }

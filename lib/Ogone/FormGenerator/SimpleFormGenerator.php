@@ -29,22 +29,25 @@ class SimpleFormGenerator implements FormGenerator
 
     /**
      * @param EcommercePaymentRequest $ecommercePaymentRequest
-     * @param string $formName
-     * @param bool $showSubmitButton
+     * @param string                  $formName
+     * @param bool                    $showSubmitButton
+     *
      * @return string HTML
      */
     public function render(EcommercePaymentRequest $ecommercePaymentRequest, $formName = 'ogone', $showSubmitButton = true)
     {
-        $formName = null !== $this->formName?$this->formName:$formName;
-        $showSubmitButton = null !== $this->showSubmitButton?$this->showSubmitButton:$showSubmitButton;
+        $formName         = null !== $this->formName ? $this->formName : $formName;
+        $showSubmitButton = null !== $this->showSubmitButton ? $this->showSubmitButton : $showSubmitButton;
 
         ob_start();
-        include __DIR__.'/template/simpleForm.php';
+        include __DIR__ . '/template/simpleForm.php';
+
         return ob_get_clean();
     }
 
     /**
      * @deprecated Will be removed in next major released, directly integrated in render method.
+     *
      * @param bool $bool
      */
     public function showSubmitButton($bool = true)
@@ -54,6 +57,7 @@ class SimpleFormGenerator implements FormGenerator
 
     /**
      * @deprecated Will be removed in next major released, directly integrated in render method.
+     *
      * @param $formName
      */
     public function setFormName($formName)

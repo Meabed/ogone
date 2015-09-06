@@ -19,6 +19,6 @@ class HashAlgorithmTest extends \TestCase
     public function CanBeRepresentedAsString()
     {
         $sha1 = new HashAlgorithm(HashAlgorithm::HASH_SHA1);
-        $this->assertEquals(HashAlgorithm::HASH_SHA1, (string) $sha1);
+        $this->assertEquals(HashAlgorithm::HASH_SHA1, (string)$sha1);
     }
 }

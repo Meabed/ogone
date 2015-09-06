@@ -8,7 +8,8 @@ namespace Ogone\Tests\DirectLink;
 use Ogone\Tests;
 use Ogone\DirectLink\DirectLinkQueryResponse;
 
-class DirectLinkQueryResponseTest extends \TestCase {
+class DirectLinkQueryResponseTest extends \TestCase
+{
 
     /**
      * @test
@@ -60,8 +61,8 @@ class DirectLinkQueryResponseTest extends \TestCase {
         $this->assertTrue($queryResponse->isSuccessful());
     }
 
-	/** @test */
-	public function AmountIsConvertedToCent()
+    /** @test */
+    public function AmountIsConvertedToCent()
     {
         $xml = $this->provideXML();
 
@@ -69,20 +70,20 @@ class DirectLinkQueryResponseTest extends \TestCase {
         $this->assertEquals(450, $queryResponse->getParam('amount'));
     }
 
-	public function provideFloats()
+    public function provideFloats()
     {
-        return array(
-            array('17.89', 1789),
-            array('65.35', 6535),
-            array('12.99', 1299),
-        );
+        return [
+            ['17.89', 1789],
+            ['65.35', 6535],
+            ['12.99', 1299],
+        ];
     }
 
-	/**
+    /**
      * @test
      * @dataProvider provideFloats
      */
-	public function CorrectlyConvertsFloatAmountsToInteger($string, $integer)
+    public function CorrectlyConvertsFloatAmountsToInteger($string, $integer)
     {
         $xml = $this->provideXML($string);
 
@@ -90,10 +91,10 @@ class DirectLinkQueryResponseTest extends \TestCase {
         $this->assertEquals($integer, $queryResponse->getParam('amount'));
     }
 
-	/**
+    /**
      * Helper method to setup an xml-string
      */
-	private function provideXML($amount = null)
+    private function provideXML($amount = null)
     {
 
         $xml = '<?xml version="1.0"?>
@@ -107,7 +108,7 @@ class DirectLinkQueryResponseTest extends \TestCase {
                 ACCEPTANCE="test123"
                 STATUS="91"
                 ECI="7"
-                AMOUNT="'.(($amount) ? $amount : '4.5').'"
+                AMOUNT="' . (($amount) ? $amount : '4.5') . '"
                 CURRENCY="GBP"
                 PM="CreditCard"
                 BRAND="VISA"

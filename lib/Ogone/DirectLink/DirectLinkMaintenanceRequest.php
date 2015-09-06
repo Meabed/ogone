@@ -9,38 +9,39 @@ use Ogone\AbstractDirectLinkRequest;
 use Ogone\ShaComposer\ShaComposer;
 use InvalidArgumentException;
 
-class DirectLinkMaintenanceRequest extends AbstractDirectLinkRequest {
+class DirectLinkMaintenanceRequest extends AbstractDirectLinkRequest
+{
 
-    const TEST = "https://secure.ogone.com/ncol/test/maintenancedirect.asp";
+    const TEST       = "https://secure.ogone.com/ncol/test/maintenancedirect.asp";
     const PRODUCTION = "https://secure.ogone.com/ncol/prod/maintenancedirect.asp";
 
-    const OPERATION_AUTHORISATION_RENEW = 'REN';
-    const OPERATION_AUTHORISATION_DELETE = 'DEL';
+    const OPERATION_AUTHORISATION_RENEW            = 'REN';
+    const OPERATION_AUTHORISATION_DELETE           = 'DEL';
     const OPERATION_AUTHORISATION_DELETE_AND_CLOSE = 'DES';
-    const OPERATION_CAPTURE_PARTIAL = 'SAL';
-    const OPERATION_CAPTURE_LAST_OR_FULL = 'SAS';
-    const OPERATION_REFUND_PARTIAL = 'RFD';
-    const OPERATION_REFUND_LAST_OR_FULL = 'RFS';
+    const OPERATION_CAPTURE_PARTIAL                = 'SAL';
+    const OPERATION_CAPTURE_LAST_OR_FULL           = 'SAS';
+    const OPERATION_REFUND_PARTIAL                 = 'RFD';
+    const OPERATION_REFUND_LAST_OR_FULL            = 'RFS';
 
     public function __construct(ShaComposer $shaComposer)
     {
         $this->shaComposer = $shaComposer;
-        $this->ogoneUri = self::TEST;
+        $this->ogoneUri    = self::TEST;
     }
 
     public function getRequiredFields()
     {
-        return array(
+        return [
             'pspid',
             'userid',
             'pswd',
             'operation',
-        );
+        ];
     }
 
     public function getValidOgoneUris()
     {
-        return array(self::TEST, self::PRODUCTION);
+        return [self::TEST, self::PRODUCTION];
     }
 
     public function setAmount($amount)
@@ -62,7 +63,7 @@ class DirectLinkMaintenanceRequest extends AbstractDirectLinkRequest {
 
     private function getValidOperations()
     {
-        return array(
+        return [
             self::OPERATION_AUTHORISATION_RENEW,
             self::OPERATION_AUTHORISATION_DELETE,
             self::OPERATION_AUTHORISATION_DELETE_AND_CLOSE,
@@ -70,6 +71,6 @@ class DirectLinkMaintenanceRequest extends AbstractDirectLinkRequest {
             self::OPERATION_CAPTURE_LAST_OR_FULL,
             self::OPERATION_REFUND_PARTIAL,
             self::OPERATION_REFUND_LAST_OR_FULL,
-        );
+        ];
     }
 }

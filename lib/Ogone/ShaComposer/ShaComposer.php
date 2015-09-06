@@ -18,6 +18,7 @@ interface ShaComposer
 {
     /**
      * Compose SHA string based on Ogone response parameters
+     *
      * @param array $parameters
      */
     public function compose(array $parameters);

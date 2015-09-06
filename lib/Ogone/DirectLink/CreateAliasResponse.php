@@ -13,14 +13,16 @@ namespace Ogone\DirectLink;
 use Ogone\AbstractResponse;
 use Ogone\ShaComposer\ShaComposer;
 
-class CreateAliasResponse extends AbstractResponse {
+class CreateAliasResponse extends AbstractResponse
+{
 
-    const STATUS_OK = 0;
-    const STATUS_NOK = 1;
+    const STATUS_OK      = 0;
+    const STATUS_NOK     = 1;
     const STATUS_UPDATED = 2;
 
     /**
      * Checks if the response is valid
+     *
      * @return bool
      */
     public function isValid(ShaComposer $shaComposer)
@@ -30,7 +32,7 @@ class CreateAliasResponse extends AbstractResponse {
 
     public function isSuccessful()
     {
-        return in_array($this->getParam('STATUS'), array(self::STATUS_OK, self::STATUS_UPDATED));
+        return in_array($this->getParam('STATUS'), [self::STATUS_OK, self::STATUS_UPDATED]);
     }
 
     public function getAlias()

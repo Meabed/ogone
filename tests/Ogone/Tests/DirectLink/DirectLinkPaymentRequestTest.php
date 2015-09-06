@@ -15,7 +15,8 @@ use Ogone\Tests\ShaComposer\FakeShaComposer;
 use Ogone\DirectLink\DirectLinkPaymentRequest;
 use Ogone\DirectLink\Alias;
 
-class DirectLinkPaymentRequestTest extends \TestCase {
+class DirectLinkPaymentRequestTest extends \TestCase
+{
 
     /** @test */
     public function IsValidWhenRequiredFieldsAreFilledIn()
@@ -103,10 +104,10 @@ class DirectLinkPaymentRequestTest extends \TestCase {
 
     public function provideBadParameters()
     {
-        return array(
-            array('setPswd', '12'),
-            array('setUserid', '12'),
-            array('setOperation', 'UNKNOWN_OPERATION'),
-        );
+        return [
+            ['setPswd', '12'],
+            ['setUserid', '12'],
+            ['setOperation', 'UNKNOWN_OPERATION'],
+        ];
     }
 }

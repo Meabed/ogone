@@ -19,7 +19,7 @@ class ShaInParameterFilterTest extends \TestCase
 	public function RemovesUnwantedParameters()
 	{
 		$filter = new ShaInParameterFilter;
-		$result = $filter->filter(array('foo' => 'bar', 'orderId' => 123));
-		$this->assertEquals(array('ORDERID' => 123), $result);
+		$result = $filter->filter(['foo' => 'bar', 'orderId' => 123]);
+		$this->assertEquals(['ORDERID' => 123], $result);
 	}
 }

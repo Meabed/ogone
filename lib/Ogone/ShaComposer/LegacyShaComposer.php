@@ -16,6 +16,7 @@ use Ogone\Passphrase;
 
 /**
  * SHA string composition the "old way", using only the "main" parameters
+ *
  * @deprecated Use AllParametersShaComposer wherever possible
  */
 class LegacyShaComposer implements ShaComposer
@@ -25,30 +26,31 @@ class LegacyShaComposer implements ShaComposer
 	 */
 	private $passphrase;
 
-    /**
-     * @var HashAlgorithm
-     */
-    private $hashAlgorithm;
+	/**
+	 * @var HashAlgorithm
+	 */
+	private $hashAlgorithm;
 
-    /**
-     * @param Passphrase $passphrase
-     * @param HashAlgorithm $hashAlgorithm
-     */
-    public function __construct(Passphrase $passphrase, HashAlgorithm $hashAlgorithm = null)
+	/**
+	 * @param Passphrase    $passphrase
+	 * @param HashAlgorithm $hashAlgorithm
+	 */
+	public function __construct(Passphrase $passphrase, HashAlgorithm $hashAlgorithm = null)
 	{
-		$this->passphrase = $passphrase;
-        $this->hashAlgorithm = $hashAlgorithm ?: new HashAlgorithm($hashAlgorithm::HASH_SHA1);
+		$this->passphrase    = $passphrase;
+		$this->hashAlgorithm = $hashAlgorithm ?: new HashAlgorithm($hashAlgorithm::HASH_SHA1);
 	}
 
-    /**
-     * @param array $parameters
-     * @return string
-     */
-    public function compose(array $parameters)
+	/**
+	 * @param array $parameters
+	 *
+	 * @return string
+	 */
+	public function compose(array $parameters)
 	{
 		$parameters = array_change_key_case($parameters, CASE_LOWER);
 
-		return strtoupper(hash($this->hashAlgorithm, implode('', array(
+		return strtoupper(hash($this->hashAlgorithm, implode('', [
 			$parameters['orderid'],
 			$parameters['currency'],
 			$parameters['amount'],
@@ -59,7 +61,7 @@ class LegacyShaComposer implements ShaComposer
 			$parameters['payid'],
 			$parameters['ncerror'],
 			$parameters['brand'],
-			$this->passphrase
-		))));
+			$this->passphrase,
+		])));
 	}
 }
