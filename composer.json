@@ -1,5 +1,21 @@
 {
-  "name": "marlon-be/marlon-ogone",
+  "name": "meabed/ogone",
+  "type": "library",
+  "description": "Ogone Payment Integration Liberary",
+  "prefer-stable": true,
+  "minimum-stability": "stable",
+  "keywords": [
+    "ogone",
+    "payment",
+    "library"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mohamed Meabed",
+      "email": "mo.meabed@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-0": {
       "Ogone": "lib/"
